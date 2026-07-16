@@ -10,8 +10,18 @@ from transformers import BertForSequenceClassification, BertTokenizerFast
 
 
 BASE_DIR = Path(__file__).resolve().parent
-MODEL_PATH = BASE_DIR / "model"
-HISTORY_FILE = BASE_DIR / "predictions.csv"
+PROJECT_ROOT = BASE_DIR
+
+for candidate in (BASE_DIR, BASE_DIR.parent):
+    if (candidate / "models").exists():
+        PROJECT_ROOT = candidate
+        break
+
+MODEL_PATH = PROJECT_ROOT / "models"
+if not MODEL_PATH.exists():
+    MODEL_PATH = BASE_DIR / "model"
+
+HISTORY_FILE = PROJECT_ROOT / "predictions.csv"
 ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "admin123"
 
@@ -35,6 +45,7 @@ def save_prediction(text: str, label: str, confidence: float) -> None:
         "confidence": confidence,
     }
 
+    HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
     new_df = pd.DataFrame([new_entry])
 
     if HISTORY_FILE.exists():
