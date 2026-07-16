@@ -1,0 +1,18 @@
+# Python environment
+.venv/
+__pycache__/
+*.pyc
+
+# Large project artifacts that should not be pushed to GitHub
+fake news detection/model/
+fake news detection/results/
+fake news detection/predictions.csv
+fake news detection/*.ipynb
+fake news detection/dashboard_mockup.html
+
+# Optional generated reports
+*.html
+*.png
+*.jpg
+*.jpeg
+*.pdf
