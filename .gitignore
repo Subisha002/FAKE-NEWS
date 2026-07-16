@@ -9,6 +9,8 @@ fake news detection/results/
 fake news detection/predictions.csv
 fake news detection/*.ipynb
 fake news detection/dashboard_mockup.html
+fake-news/models/
+fake-news/predictions.csv
 
 # Optional generated reports
 *.html
