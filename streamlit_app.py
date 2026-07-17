@@ -46,14 +46,18 @@ else:
         news_text = st.text_area(
             "Enter news text",
             height=220,
-            placeholder="Paste article text or claim here...",
+            placeholder="Paste the full news article body here (at least 20 words). "
+                        "The model was trained on complete articles — headlines alone may not produce accurate results.",
         )
 
         if st.button("Analyze News", use_container_width=True):
             if news_text.strip():
                 label, confidence = predict_news(news_text)
-                st.success(f"Prediction: {label}")
-                st.metric("Confidence", f"{confidence:.2f}%")
+                if confidence == 0.0:
+                    st.warning(label)
+                else:
+                    st.success(f"Prediction: {label}")
+                    st.metric("Confidence", f"{confidence:.2f}%")
             else:
                 st.warning("Please enter some text before analyzing.")
 

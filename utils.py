@@ -47,13 +47,23 @@ def predict_news(text: str):
     if not text.strip():
         return "Please enter some text", 0.0
 
+    # Model was trained on full news articles (WELFake dataset).
+    # Very short inputs (headlines only) are unreliable — warn the user.
+    word_count = len(text.split())
+    if word_count < 20:
+        return (
+            "TOO SHORT — please paste the full article body (at least 20 words) "
+            "for an accurate prediction",
+            0.0,
+        )
+
     tokenizer, model, device = load_model()
     inputs = tokenizer(
         text,
         return_tensors="pt",
         truncation=True,
         padding=True,
-        max_length=256,
+        max_length=512,   # BERT maximum; matches full-article training context
     ).to(device)
 
     outputs = model(**inputs)
