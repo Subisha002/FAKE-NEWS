@@ -1,6 +1,11 @@
 streamlit
-transformers
 torch
+transformers
+tokenizers
 pandas
-matplotlib
+numpy
 scikit-learn
+safetensors
+joblib
+nltk
+matplotlib

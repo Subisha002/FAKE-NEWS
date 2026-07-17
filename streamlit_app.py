@@ -49,7 +49,7 @@ else:
             placeholder="Paste article text or claim here...",
         )
 
-        if st.button("Analyze News", width="stretch"):
+        if st.button("Analyze News", use_container_width=True):
             if news_text.strip():
                 label, confidence = predict_news(news_text)
                 st.success(f"Prediction: {label}")
@@ -73,4 +73,4 @@ else:
                 st.pyplot(fig)
 
             st.subheader("Prediction history")
-            st.dataframe(df, width="stretch")
+            st.dataframe(df, use_container_width=True)

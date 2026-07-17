@@ -9,6 +9,7 @@ fake news detection/results/
 fake news detection/predictions.csv
 fake news detection/*.ipynb
 fake news detection/dashboard_mockup.html
+fake news detection/test_api.py
 fake-news/models/
 fake-news/predictions.csv
 
@@ -18,3 +19,6 @@ fake-news/predictions.csv
 *.jpg
 *.jpeg
 *.pdf
+
+# Local history database
+predictions.csv

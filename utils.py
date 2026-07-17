@@ -5,6 +5,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
+import streamlit as st
 import torch
 from transformers import BertForSequenceClassification, BertTokenizerFast
 
@@ -13,7 +14,7 @@ MODEL_PATH = BASE_DIR / "models"
 HISTORY_FILE = BASE_DIR / "predictions.csv"
 
 
-@torch.inference_mode()
+@st.cache_resource
 def load_model():
     tokenizer = BertTokenizerFast.from_pretrained(MODEL_PATH)
     model = BertForSequenceClassification.from_pretrained(MODEL_PATH)
@@ -41,6 +42,7 @@ def save_prediction(text: str, label: str, confidence: float) -> None:
         new_df.to_csv(HISTORY_FILE, index=False)
 
 
+@torch.inference_mode()
 def predict_news(text: str):
     if not text.strip():
         return "Please enter some text", 0.0
